@@ -1,7 +1,11 @@
 package com.purbon.search.fair.utils;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.apache.commons.math3.distribution.BinomialDistribution;
+
+import java.util.Arrays;
 
 public class MTableGenerator {
 
@@ -88,6 +92,22 @@ public class MTableGenerator {
             this.mTable = computeMTable();
         }
         return mTable;
+    }
+
+    public String toJSONObjectString(){
+       String json ="{\"mTable\" : [";
+        for(int i=0; i<this.getMTable().length; i++){
+            json+="\"";
+            json+=this.getMTable()[i];
+            if(i+1<this.getMTable().length) {
+                json += "\",";
+            }else{
+                json+="\"";
+            }
+        }
+        json+="]}";
+
+        return json;
     }
 
     public int getK() {
